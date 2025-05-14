@@ -1,0 +1,13 @@
+build/*
+node_modules/*
+sdkconfig.old
+Compile_crash.txt
+.ftpdeploy.js
+.vscode/*
+.venv/
+build/
+managed_components/
+*.pyc
+__pycache__/
+.vscode/
+.idea/
