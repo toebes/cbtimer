@@ -453,12 +453,20 @@ void showCountdownTime(void)
     {
         int nSecondsRemain;
         int nMinutesRemain;
+        int nTenDigit;
+        int nOneDigit;
         appData.dLastSeconds = appData.dElapsedSeconds;
         nSecondsRemain = ceil(EVENT_LENGTH - appData.dElapsedSeconds);
         nMinutesRemain = (((nSecondsRemain * SCALE_SPEED) + 59) / 60);
 
-        appData.amDigits[0] = Get_Segment_Mask((nMinutesRemain % 100) / 10);
-        appData.amDigits[1] = Get_Segment_Mask(nMinutesRemain % 10);
+        nTenDigit = (nMinutesRemain % 100) / 10;
+        nOneDigit = nMinutesRemain % 10;
+        if (nTenDigit == 0)
+        {
+            nTenDigit = ' ';
+        }
+        appData.amDigits[0] = Get_Segment_Mask(nTenDigit);
+        appData.amDigits[1] = Get_Segment_Mask(nOneDigit);
         ESP_LOGI(TAG, "Remain: %02d:%02d Time: %.2f", nMinutesRemain, nSecondsRemain % 60, appData.dElapsedSeconds);
         Timer_Display();
     }
